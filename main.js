@@ -4,55 +4,6 @@ let action = "";
 let result = "";
 let calculated = false;
 
-document.addEventListener("DOMContentLoaded", function() {
-    let nums = document.querySelectorAll(".num");
-    let ops = document.querySelectorAll(".operator");
-    let equal = document.querySelector("#eq");
-
-    nums.forEach((num) => num.addEventListener("click", function(e) {
-        display(result);
-        if (calculated) {
-            !calculated;
-        }
-        if (action != "" && num1 != "") {
-            num2 = e.target.textContent;
-            display(num2);
-        }
-        else {
-            num1 = e.target.textContent;
-            display(num1);
-        }
-    }))
-
-    ops.forEach((op) => op.addEventListener("click", function(e) {
-        calculated = false;
-        if (num1 != "" && num2 != "") {
-            if (num1 != "0" && num2 == "0" && action == "/") {
-                clear();
-                display("ERROR");
-            }
-            display(calculate(num1, op, num2));
-            num1 = calculate(num1, op, num2)
-            num2 = "";
-        }
-        action = e.target.textContent;
-    }))
-
-    document.querySelector(".clear").addEventListener("click", clear());
-    document.querySelector("#eq").addEventListener("click", function() {
-        display("");
-        if (num1 != "0" && num2 == "0" && action == "/") {
-            clear();
-            display("ERROR");
-        }
-        display(calculate(num1, op, num2));
-        num1 = calculate(num1, op, num2)
-        num2 = "";
-        action = "";
-        calculated = true;
-    })
-});
-
 function add(a, b) {
     return a + b;
 }
@@ -74,8 +25,7 @@ function percent(a, b) {
 }
 
 function display(result) {
-    let display = document.querySelector(".display");
-    display.innerHTML = result;
+    document.querySelector(".display").textContent = result;
 }
 
 function clear() {
@@ -88,18 +38,78 @@ function clear() {
 
 function calculate(a, op, b) {
     if (op == "+") {
-        return add(a,b);
+        return add(parseInt(a),parseInt(b));
     }
     else if (op == "-") {
-        return subtract(a,b);
+        return subtract(parseInt(a),parseInt(b));
     }
     else if (op == "*") {
-        return multiply(a,b);
+        return multiply(parseInt(a),parseInt(b));
     }
     else if (op == "/") {
-        return divide(a,b);
+        return divide(parseInt(a),parseInt(b));
     }
     else if (op == "%") {
-        return percent(a,b);
+        return percent(parseInt(a),parseInt(b));
     }
 }
+
+let nums = document.querySelectorAll(".num");
+let ops = document.querySelectorAll(".operator");
+let equal = document.querySelector("#eq");
+
+nums.forEach((num) => num.addEventListener("click", function() {
+    display(result);
+    if (calculated == true) {
+        num1 = "";
+        calculated = false;
+    }
+    if (action != "" && num1 != "") {
+        num2 += num.textContent;
+        display(num2);
+        console.log(num2);
+    }
+    else {
+        num1 += num.textContent;
+        display(num1);
+        console.log(num1);
+    }
+}));
+
+ops.forEach((op) => op.addEventListener("click", function() {
+    display("");
+    calculated = false;
+    if (num1 != "" && num2 != "") {
+        if (num1 != "0" && num2 == "0" && action == "/") {
+            clear();
+            display("ERROR");
+            return;
+        }
+        display(calculate(num1, op, num2));
+        num1 = calculate(num1, op, num2)
+        num2 = "";
+    }
+    action = op.textContent;
+    console.log(action);
+}));
+
+document.querySelector("#clear").addEventListener("click", () => {
+    clear();
+    console.log("cleared");
+});
+
+document.querySelector(".eq").addEventListener("click", function() {
+    display("");
+    if (num1 != "0" && num2 == "0" && action == "/") {
+        clear();
+        display("ERROR");
+        return;
+    }
+    result = calculate(num1, action, num2);
+    console.log(result);
+    display(result);
+    num1 = result;
+    num2 = "";
+    action = "";
+    calculated = true;
+});

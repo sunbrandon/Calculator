@@ -31,7 +31,7 @@ button {
     text-overflow: clip;
 }
 
-.clear {
+#clear {
     background-color: orange;
 }
 
