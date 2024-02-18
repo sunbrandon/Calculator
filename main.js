@@ -43,7 +43,7 @@ function calculate(a, op, b) {
     else if (op == "-") {
         return subtract(parseInt(a),parseInt(b));
     }
-    else if (op == "*") {
+    else if (op == "x") {
         return multiply(parseInt(a),parseInt(b));
     }
     else if (op == "/") {
@@ -97,6 +97,12 @@ document.querySelector("#clear").addEventListener("click", () => {
     clear();
     console.log("cleared");
 });
+
+document.querySelector("#setneg").addEventListener("click", () => {
+    num1 *= -1;
+    result = num1;
+    display(result);
+})
 
 document.querySelector(".eq").addEventListener("click", function() {
     display("");
