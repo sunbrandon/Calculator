@@ -38,19 +38,19 @@ function clear() {
 
 function calculate(a, op, b) {
     if (op == "+") {
-        return add(parseInt(a),parseInt(b));
+        return add(parseFloat(a),parseFloat(b));
     }
     else if (op == "-") {
-        return subtract(parseInt(a),parseInt(b));
+        return subtract(parseFloat(a),parseFloat(b));
     }
     else if (op == "x") {
-        return multiply(parseInt(a),parseInt(b));
+        return multiply(parseFloat(a),parseFloat(b));
     }
     else if (op == "/") {
-        return divide(parseInt(a),parseInt(b));
+        return divide(parseFloat(a),parseFloat(b));
     }
     else if (op == "%") {
-        return percent(parseInt(a),parseInt(b));
+        return percent(parseFloat(a),parseFloat(b));
     }
 }
 
