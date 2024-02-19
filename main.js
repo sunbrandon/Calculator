@@ -85,8 +85,9 @@ ops.forEach((op) => op.addEventListener("click", function() {
             display("ERROR");
             return;
         }
-        display(calculate(num1, op, num2));
-        num1 = calculate(num1, op, num2)
+        display(calculate(num1, action, num2));
+        num1 = calculate(num1, action, num2)
+        console.log(num1);
         num2 = "";
     }
     action = op.textContent;
@@ -111,10 +112,9 @@ document.querySelector(".eq").addEventListener("click", function() {
         display("ERROR");
         return;
     }
-    result = calculate(num1, action, num2);
-    console.log(result);
-    display(result);
-    num1 = result;
+    display(calculate(num1, action, num2));
+    console.log(calculate(num1, action, num2));
+    num1 = calculate(num1, action, num2);
     num2 = "";
     action = "";
     calculated = true;
